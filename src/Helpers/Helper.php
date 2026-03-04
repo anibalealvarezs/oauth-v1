@@ -12,7 +12,7 @@ class Helper
     {
         if (is_array($input)) {
             return array_map([self::class, 'urlencode_rfc3986'], $input);
-        } else if (is_scalar($input)) {
+        } elseif (is_scalar($input)) {
             return str_replace(
                 '+',
                 ' ',
@@ -29,7 +29,9 @@ class Helper
      */
     public static function build_http_query(array $params): string
     {
-        if (!$params) return '';
+        if (!$params) {
+            return '';
+        }
 
         // Urlencode both keys and values
         $keys = Helper::urlencode_rfc3986(array_keys($params));

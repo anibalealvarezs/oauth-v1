@@ -258,7 +258,7 @@ class OAuthV1
             queryParams: $queryParams,
         );
         $counter = 0;
-        foreach($params['params'] as $k => $v) {
+        foreach ($params['params'] as $k => $v) {
             if (!isset($queryParams[$k])) {
                 $string .= ($counter > 0 ? ',' : '') . $k . '="' . $v . '"';
             }
@@ -355,7 +355,7 @@ class OAuthV1
             ...$queryParams,
         ];
         $normalizedParams = [];
-        foreach($params as $k => $v) {
+        foreach ($params as $k => $v) {
             $normalizedParams[Helper::urlencode_rfc3986($k)] = Helper::urlencode_rfc3986($v);
         }
         uksort($normalizedParams, 'strcmp');

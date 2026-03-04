@@ -5,9 +5,15 @@
 The `OAuthV1` class, part of the `anibalealvarezs/oauth-v1` package, implements OAuth 1.0 authentication for secure API interactions. It provides methods to configure consumer credentials, tokens, signature methods, and generate authorization headers for HTTP requests. The class supports multiple signature methods (HMAC-SHA1, HMAC-SHA256, PLAINTEXT) and includes utilities for normalizing parameters and generating signatures.
 
 ### Namespace
+
 `Anibalealvarezs\OAuthV1`
 
+## Version
+
+`1.0.0`
+
 ### Dependencies
+
 - PHP 8.1 or higher
 - `Anibalealvarezs\OAuthV1\Enums\SignatureMethod`
 - `Anibalealvarezs\OAuthV1\Helpers\Helper`
@@ -24,12 +30,12 @@ Ensure the repository is configured in `composer.json`:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.anibalalvarez.com/"
-        }
-    ]
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.anibalalvarez.com/"
+    }
+  ]
 }
 ```
 
@@ -80,6 +86,7 @@ $oauth->setConsumerId('new-consumer-id')
 ## Methods
 
 ### Constructor
+
 ```php
 public function __construct(
     string $consumerId,
@@ -91,9 +98,11 @@ public function __construct(
     string $version = "1.0"
 )
 ```
+
 Initializes the OAuth 1.0 client with consumer credentials, tokens, realm, signature method, and version. Automatically generates a nonce using `Helper::generateNonce`.
 
 ### Setters
+
 - `setConsumerId(string $consumerId): self`
 - `setConsumerSecret(string $consumerSecret): self`
 - `setToken(string $token): self`
@@ -107,6 +116,7 @@ Initializes the OAuth 1.0 client with consumer credentials, tokens, realm, signa
 Set OAuth 1.0 parameters and return the instance for method chaining.
 
 ### Getters
+
 - `getSignatureMethod(): SignatureMethod`
 - `getVersion(): string`
 - `getNonce(): string`
@@ -115,6 +125,7 @@ Set OAuth 1.0 parameters and return the instance for method chaining.
 Retrieve configured OAuth parameters.
 
 ### OAuth 1.0 Methods
+
 - `getAuthorizationHeader(string $method, string $url, array $queryParams = [], string $prefix = ''): array`
   - Generates an OAuth 1.0 authorization header string and debug data.
   - Returns: `['string' => 'OAuth ...', 'debugData' => [...]]`
@@ -126,7 +137,9 @@ Retrieve configured OAuth parameters.
   - Generates a signed signature base string (SBS) using the configured signature method.
 
 ## Signature Methods
+
 Supported signature methods (via `SignatureMethod` enum):
+
 - `HMAC_SHA1`: HMAC-SHA1 signature.
 - `HMAC_SHA256`: HMAC-SHA256 signature.
 - `PLAINTEXT`: Plaintext signature (consumer secret and token secret).
@@ -162,6 +175,7 @@ curl_close($curl);
 ```
 
 ## Notes
+
 - The `Helper` class provides utilities like `generateNonce`, `getNormalizedUrl`, and `build_http_query`.
 - The `oauth_timestamp` is set to the current time by default in `getNormalizedParams` if not explicitly set.
 - Ensure URLs and parameters are properly URL-encoded using `Helper::urlencode_rfc3986` for compliance with OAuth 1.0.
@@ -184,20 +198,20 @@ To set up the tests, add PHPUnit and Faker to the development dependencies in yo
 
 ```json
 {
-    "require": {
-        "php": ">=8.1",
-        "anibalealvarezs/oauth-v1": "@dev"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.anibalalvarez.com/"
-        }
-    ],
-    "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "fakerphp/faker": "^1.20"
+  "require": {
+    "php": ">=8.1",
+    "anibalealvarezs/oauth-v1": "@dev"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.anibalalvarez.com/"
     }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "fakerphp/faker": "^1.20"
+  }
 }
 ```
 
@@ -217,6 +231,7 @@ The `OAuthV1Test.php` test class, located in `tests/OAuthV1Test.php`, verifies t
 - **PHPUnit**: Provides the testing framework for assertions and test execution.
 
 The `setUp` method initializes the test environment by:
+
 - Creating a Faker instance for generating test data.
 - Defining OAuth 1.0 parameters, such as consumer ID, consumer secret, token, token secret, realm, signature method (`HMAC_SHA1`), version (`1.0`), nonce, and timestamp.
 - Using setters (e.g., `setNonce`, `setTimestamp`) to ensure deterministic values for tests involving nonce and timestamp.
@@ -232,11 +247,13 @@ To run the tests for the `OAuthV1` class, use the following command from the roo
 ```
 
 ### Command Breakdown
+
 - `./vendor/bin/phpunit`: Executes the PHPUnit binary installed via Composer.
 - `--verbose`: Enables verbose output, displaying detailed information about each test case, including test names and results.
 - `tests/OAuthV1Test.php`: Specifies the test file for the `OAuthV1` class.
 
 ### Expected Output
+
 When running the command, you will see output similar to the following (assuming all 14 tests pass):
 
 ```
@@ -256,7 +273,9 @@ OK (14 tests, 40 assertions)
 - With `--verbose`, additional details about each test method (e.g., `testConstructorWithValidParameters`, `testGetAuthorizationHeaderWithHmacSha1`) will be displayed.
 
 ### Troubleshooting
+
 If tests fail, check the following:
+
 - **Dependencies**: Ensure all dependencies are installed (`composer install`) and match the required versions. Verify that `anibalealvarezs/oauth-v1` and `fakerphp/faker` are correctly installed.
 - **PHP Version**: Confirm PHP 8.1 or higher is used (`php -v`).
 - **Composer Autoloader**: Run `composer dump-autoload` to regenerate the autoloader if classes are not found.
@@ -303,6 +322,7 @@ For an HTML report:
 This generates an HTML report in the `coverage/` directory, detailing coverage for the `OAuthV1` class (requires PHPUnit to be configured with coverage reporting).
 
 ## Additional Notes
+
 - **Nonce Handling**: Tests use `setNonce` to set deterministic nonce values, as the static `Helper::generateNonce` method cannot be mocked. This ensures consistent signature generation.
 - **Isolation**: Each test method is isolated, with the `setUp` method resetting the test environment to prevent state leakage.
 - **Extending Tests**: To add tests for additional signature methods (e.g., `HMAC_SHA256`), edge cases (e.g., invalid URLs, empty parameters), or validation (e.g., empty consumer ID), extend `OAuthV1Test.php` with new test methods.
