@@ -1,13 +1,18 @@
 {
     "name": "anibalealvarezs/oauth-v1",
-    "description": "description",
+    "description": "A lightweight PHP library for handling OAuth 1.0a authentication and request signing.",
     "license": "MIT",
+    "keywords": ["oauth", "oauth1", "authentication", "api", "signing", "guzzle-middleware"],
+    "homepage": "https://github.com/anibalealvarezs/OAuth-v1",
     "authors": [
         {
             "name": "Aníbal Álvarez",
             "email": "anibalealvarezs@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/anibalealvarezs/OAuth-v1/issues"
+    },
     "require": {
         "php": ">=8.1"
     },
