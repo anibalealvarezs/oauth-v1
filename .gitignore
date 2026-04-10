@@ -2,3 +2,4 @@
 /vendor/
 /.vscode/
 phpstan.neon
+**/.php-cs-fixer.dist.php
