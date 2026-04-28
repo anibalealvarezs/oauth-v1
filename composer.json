@@ -2,7 +2,14 @@
     "name": "anibalealvarezs/oauth-v1",
     "description": "A lightweight PHP library for handling OAuth 1.0a authentication and request signing.",
     "license": "MIT",
-    "keywords": ["oauth", "oauth1", "authentication", "api", "signing", "guzzle-middleware"],
+    "keywords": [
+        "oauth",
+        "oauth1",
+        "authentication",
+        "api",
+        "signing",
+        "guzzle-middleware"
+    ],
     "homepage": "https://github.com/anibalealvarezs/OAuth-v1",
     "authors": [
         {
@@ -28,8 +35,9 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.20",
-        "phpunit/phpunit": "^9",
-        "phpstan/phpstan": "^1.10"
+        "doctrine/instantiator": "^1.5",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^9"
     },
     "minimum-stability": "dev",
     "prefer-stable": false
